@@ -8,7 +8,15 @@ var express = require('express'),
     methodOverride = require('method-override'),
     app = express(),
     server = require('http').Server(app),
-    io = require('socket.io')(server);
+    io = require('socket.io')(server, {
+        cors: {
+            origin: "http://localhost:8100",
+            methods: ["GET", "POST"],
+            transports: ['websocket', 'polling'],
+            credentials: true
+        },
+        allowEIO3: true
+    });
 
 io.set('transports', ['polling']);
 
